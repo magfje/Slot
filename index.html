@@ -8,24 +8,41 @@
     <title>Document</title>
 
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+
         * {
             margin: 0px;
             padding: 0px;
+            background-color: #4C566A;
+            font-family: 'Josefin Sans', sans-serif;
         }
 
         nav {
             display: flex;
             gap: 2rem;
-            background-color: aqua;
+            background-color: #2E3440;
+            color: #ECEFF4;
+        }
+        nav h1 {
+            background-color: #2E3440;
+            padding: 20px;
         }
 
         .container {}
 
         .alertBar {
-            background-color: antiquewhite;
+            background-color: #5E81AC;
             text-align: center;
             padding: 2rem;
             margin: 2rem;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            border-radius: 25px;
+            font-size: 30px;
+        }
+
+        .alertBar h2 {
+            background-color: #5E81AC;
         }
 
         .slotContainer {
@@ -45,7 +62,7 @@
             transform-style: preserve-3d;
             position: relative;
             height: fit-content;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
             border-radius: 25px;
         }
 
@@ -90,20 +107,41 @@
             justify-content: center;
             margin: 2rem;
             height: 8rem;
+            gap: 15px;
         }
 
         .stats {
             flex: 1;
-            background-color: beige;
+            background-color: #D8DEE9;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            border-radius: 25px;
+            font-size: 25px;
         }
 
         .stats div {
             display: flex;
-            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10px;
+            gap: 20px;
+            background-color: #D8DEE9;
+            border-radius: 25px;
+            
         }
 
         .rButton {
             flex: 2;
+            border: none;
+            background-color: #8FBCBB;
+            border-radius: 25px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            font-size: 80px;
+            color: #D8DEE9;;
+        }
+
+        .rButton:hover {
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            background-color: #88C0D0;
         }
 
         @keyframes rotate-hor-center {
@@ -120,13 +158,10 @@
 
 <body>
     <nav>
-        <img src="LOGO.jfif">
         <h1>SlotMachine</h1>
     </nav>
     <div class="container">
-        <div class="alertBar">
-            <h2 id="alertText">Some Alert</h2>
-        </div>
+        <div class="alertBar">Some Alert</div>
         <div class="slotContainer">
             <div class="slot" id="slot1">
                 <img class="slotFace slotFace-front" id="s1img" src="back.jfif">
@@ -144,12 +179,12 @@
         <div class="bottomBar">
             <div class="stats">
                 <div class="balance">
-                    <h2>Balance:</h2>
-                    <h2 id="mBalance">50</h2>
+                    <div>Balance:</div>
+                    <div id="mBalance">50</div>
                 </div>
                 <div>
-                    <h2>Cost per Roll:</h2>
-                    <h2>5</h2>
+                    <div>Cost per Roll:</div>
+                    <div>5</div>
                 </div>
             </div>
             <button class="rButton" id="roll">ROLL</button>
@@ -222,25 +257,24 @@
         //Style changes on Win
         function animateWin(winNum) {
             //define vars
-            let alertText = document.getElementById("alertText");
             let alertBar = document.querySelector(".alertBar");
 
             //Check input param, and apply changes
             if (winNum == 1) {
-                alertBar.style.background = "yellow"
+                alertBar.style.background = "#A3BE8C"
                 balance = Number(balance) + 10
-                alertText.innerHTML = "WINNER! You Won 10"
+                alertBar.innerHTML = "WINNER! You Won 10"
             } else if (winNum == 2) {
-                alertBar.style.background = "yellow"
+                alertBar.style.background = "#A3BE8C"
                 balance = Number(balance) + 20
-                alertText.innerHTML = "WINNER! You Won 30"
+                alertBar.innerHTML = "WINNER! You Won 30"
             } else if (winNum == 3) {
-                alertBar.style.background = "yellow"
+                alertBar.style.background = "#A3BE8C"
                 balance = Number(balance) + 30
-                alertText.innerHTML = "WINNER! You Won 30"
+                alertBar.innerHTML = "WINNER! You Won 30"
             } else {
-                alertBar.style.background = "red"
-                alertText.innerHTML = "Try Again!"
+                alertBar.style.background = "#BF616A"
+                alertBar.innerHTML = "Try Again!"
                 balance = Number(balance) - 5
             }
             //update Balance
