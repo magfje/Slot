@@ -151,6 +151,7 @@
         const slotCont = document.querySelectorAll('.slot');
 
 
+
         function slotRoll() {
             roll = Math.floor(Math.random() * 1000);
             //check roll and return a value. Used higher numbers to be able to add more slots, and better tweaking of rng
@@ -164,17 +165,33 @@
 
         }
 
+
+
         function roller() {
+            const checkWin = []
             for (let i = 0; i < slotFace.length; i++) {
                 animateRoll()
                 setTimeout(() => {
                     slotRoll();
                     slotFace[i].src = slotSpin + ".png";
-                    checkslot[i] = slotSpin;
+                    checkWin.push(slotSpin);
+
+                    if (i === 2) {
+                        if (checkWin.every((val) => val === 1)) {
+                            console.log("111");
+                        } else if (checkWin.every((val) => val === 2)) {
+                            console.log("222")
+                        } else if (checkWin.every((val) => val === 3)) {
+                            console.log("333")
+                        } else {
+                            console.log("try again!")
+                        }
+                    }
                 }, (i + 1) * 500);
             }
 
         }
+
 
         function animateRoll() {
 
