@@ -32,7 +32,7 @@
         .container {}
 
         .alertBar {
-            background-color: #5E81AC;
+            background-color: #EBCB8B;
             text-align: center;
             padding: 2rem;
             margin: 3rem;
@@ -49,13 +49,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            perspective: 1000px;
-
+            gap: 2rem;
+            padding: 5rem;
+            perspective: 80rem;
+            margin: 3rem;
         }
 
         .slotContainer img {
-            width: 400px;
+            max-width: 25rem;
+            
         }
 
         .slot {
@@ -190,21 +192,28 @@
                     <div id="mBalance">50</div>
                 </div>
                 <div>
-                    <div>Cost per Roll:</div>
-                    <div>5</div>
+                    <div>Bet:</div>
+                    <div id="costSet">5</div>
+                    <input type="range" id="cost">
                 </div>
             </div>
             <button class="rButton" id="roll">ROLL</button>
         </div>
+        
     </div>
 
     <script>
 
         //Starting Balance
         let balance = "50";
+        let cost = 5;
 
         const slotFace = document.querySelectorAll('.slotFace-front');
         const slotCont = document.querySelectorAll('.slot');
+
+        //audio
+        
+
 
         function slotRoll() {
             roll = Math.floor(Math.random() * 1000);
@@ -228,14 +237,18 @@
                     slotRoll();
                     slotFace[i].src = slotSpin + ".png";
                     checkWin.push(slotSpin);
+                    
 
                     if (i === 2) {
                         if (checkWin.every((val) => val === 1)) {
                             animateWin(1);
+                            new Audio('win1.ogg').play();
                         } else if (checkWin.every((val) => val === 2)) {
                             animateWin(2);
+                            new Audio('win2.ogg').play();
                         } else if (checkWin.every((val) => val === 3)) {
                             animateWin(3);
+                            new Audio('win3.ogg').play();
                         } else {
                             animateWin();
                         }
@@ -257,6 +270,7 @@
                         slot.add('slotAnim');
                         void slotCont[u].offsetWidth;
                     }
+                    new Audio('click.ogg').play();
                 }, (u + 1) * 200);
             }
         }
@@ -268,21 +282,21 @@
 
             //Check input param, and apply changes
             if (winNum == 1) {
-                alertBar.style.background = "#A3BE8C"
-                balance = Number(balance) + 10
-                alertBar.innerHTML = "WINNER! You Won 10"
+                alertBar.style.background = "#A3BE8C";
+                balance = Number(balance) + Math.round(cost * 1.5);
+                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 1.5);
             } else if (winNum == 2) {
-                alertBar.style.background = "#A3BE8C"
-                balance = Number(balance) + 20
-                alertBar.innerHTML = "WINNER! You Won 20"
+                alertBar.style.background = "#A3BE8C";
+                balance = Number(balance) + Math.round(cost * 2);
+                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 2);
             } else if (winNum == 3) {
                 alertBar.style.background = "#A3BE8C"
-                balance = Number(balance) + 30
-                alertBar.innerHTML = "WINNER! You Won 30"
+                balance = Number(balance) + Math.round(cost * 3)
+                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 3);
             } else {
-                alertBar.style.background = "#BF616A"
+                alertBar.style.background = "#B48EAD"
                 alertBar.innerHTML = "Try Again!"
-                balance = Number(balance) - 5
+                balance = Number(balance) - cost
             }
             //update Balance
             document.getElementById("mBalance").innerHTML = balance
@@ -290,18 +304,29 @@
 
         //only rolls if balance < 5
         function rollIfBalance() {
-            if (balance < 5) {
+            if (balance == 0) {
                 document.getElementById("roll").innerHTML = "add more money to spin!";
                 document.getElementById("roll").style.background = "#BF616A"
                 this.disabled = true
+            } else if (balance < cost) {
+                document.getElementById("roll").innerHTML = "reduce bet to spin";
             } else {
+                document.getElementById("roll").innerHTML = "ROLLING";
                 this.disabled = true
                 roller();
                 setTimeout(() => {
+                    document.getElementById("roll").innerHTML = "ROLL";
                     this.disabled = false;
                 }, 1200);
             }
         }
+        
+        let costLoc = document.getElementById('cost');
+        let costSet = document.getElementById('costSet')
+        costLoc.addEventListener("input", function(e) {
+        cost = Math.floor(e.currentTarget.value / 11 + 1);
+        costSet.innerHTML = cost
+        });
 
         //EventListener
         roll.addEventListener("click", rollIfBalance)
