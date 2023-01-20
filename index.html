@@ -61,9 +61,12 @@
         .slot {
             transform-style: preserve-3d;
             position: relative;
-            height: fit-content;
+            height: 520px;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
             border-radius: 25px;
+            border: 10px solid #EBCB8B;
+            overflow: hidden;
+           
         }
 
         /* .slot:hover {
@@ -88,8 +91,6 @@
 
         .slotFace {
             backface-visibility: hidden;
-            border-radius: 25px;
-
         }
 
         .slotFace-front {
@@ -275,7 +276,7 @@
             } else if (winNum == 2) {
                 alertBar.style.background = "#A3BE8C"
                 balance = Number(balance) + 20
-                alertBar.innerHTML = "WINNER! You Won 30"
+                alertBar.innerHTML = "WINNER! You Won 20"
             } else if (winNum == 3) {
                 alertBar.style.background = "#A3BE8C"
                 balance = Number(balance) + 30
@@ -294,6 +295,7 @@
             if (balance < 5) {
                 document.getElementById("roll").innerHTML = "add more money to spin!";
                 document.getElementById("roll").style.background = "#BF616A"
+                this.disabled = true
             } else {
                 this.disabled = true
                 roller();
