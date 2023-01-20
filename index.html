@@ -284,15 +284,15 @@
             if (winNum == 1) {
                 alertBar.style.background = "#A3BE8C";
                 balance = Number(balance) + Math.round(cost * 1.5);
-                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 1.5);
+                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 2);
             } else if (winNum == 2) {
                 alertBar.style.background = "#A3BE8C";
                 balance = Number(balance) + Math.round(cost * 2);
-                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 2);
+                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 5);
             } else if (winNum == 3) {
                 alertBar.style.background = "#A3BE8C"
                 balance = Number(balance) + Math.round(cost * 3)
-                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 3);
+                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 10);
             } else {
                 alertBar.style.background = "#B48EAD"
                 alertBar.innerHTML = "Try Again!"
@@ -324,7 +324,7 @@
         let costLoc = document.getElementById('cost');
         let costSet = document.getElementById('costSet')
         costLoc.addEventListener("input", function(e) {
-        cost = Math.floor(e.currentTarget.value / 11 + 1);
+        cost = Math.floor(e.currentTarget.value / 5.2 + 1);
         costSet.innerHTML = cost
         });
 
