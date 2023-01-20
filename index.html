@@ -63,8 +63,8 @@
             position: relative;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
             border-radius: 25px;
-            border: 10px solid #EBCB8B;
-            background-color: #EBCB8B;
+            border: 10px solid #2E3440;
+            background-color: #2E3440;
         }
 
         /* .slot:hover {
@@ -171,16 +171,16 @@
         <div class="alertBar">SPIN TO WIN!!</div>
         <div class="slotContainer">
             <div class="slot" id="slot1">
-                <img class="slotFace slotFace-front" id="s1img" src="back.jfif">
-                <img class="slotFace slotFace-back" src="back.jfif">
+                <img class="slotFace slotFace-front" id="s1img" src="back.png">
+                <img class="slotFace slotFace-back" src="back.png">
             </div>
             <div class="slot" id="slot2">
-                <img class="slotFace slotFace-front" id="s2img" src="back.jfif">
-                <img class="slotFace slotFace-back" src="back.jfif">
+                <img class="slotFace slotFace-front" id="s2img" src="back.png">
+                <img class="slotFace slotFace-back" src="back.png">
             </div>
             <div class="slot" id="slot3">
-                <img class="slotFace slotFace-front" id="s3img" src="back.jfif">
-                <img class="slotFace slotFace-back" src="back.jfif">
+                <img class="slotFace slotFace-front" id="s3img" src="back.png">
+                <img class="slotFace slotFace-back" src="back.png">
             </div>
         </div>
         <div class="bottomBar">
@@ -226,7 +226,7 @@
                 animateRoll()
                 setTimeout(() => {
                     slotRoll();
-                    slotFace[i].src = slotSpin + ".jfif";
+                    slotFace[i].src = slotSpin + ".png";
                     checkWin.push(slotSpin);
 
                     if (i === 2) {
@@ -343,7 +343,7 @@
                             animateSlot(x)
                             setTimeout(() => {
                                 slotRoll()
-                                o.src = slotSpin + ".jfif";
+                                o.src = slotSpin + ".png";
                                 spin1 = slotSpin;
                             }, 600);
                         }, 200);
@@ -352,7 +352,7 @@
                             animateSlot(y)
                             setTimeout(() => {
                                 slotRoll()
-                                i.src = slotSpin + ".jfif";
+                                i.src = slotSpin + ".png";
                                 spin2 = slotSpin;
                             }, 600);
                         }, 600);
@@ -361,7 +361,7 @@
                             animateSlot(z)
                             setTimeout(() => {
                                 slotRoll()
-                                u.src = slotSpin + ".jfif";
+                                u.src = slotSpin + ".png";
                                 spin3 = slotSpin;
                             }, 600);
         
