@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slot Machine</title>
+    <style>
+        .col {
+            display: flex;
+            flex-flow: column nowrap;
+            border: 1px solid black;
+            min-height: 80vh;
+
+        }
+
+        .row {
+            display: flex;
+            flex-flow: row nowrap;
+            border: 1px solid blue;
+        }
+
+        .flex-8 {
+            flex-grow: 0.083333;
+            border: 1px solid red;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flex-83 {
+            flex-grow: 0.833334;
+            border: 1px solid red;
+
+        }
+
+        .flex-13 {
+            flex-grow: 0.125;
+            border: 1px solid red;
+            width: 100%;
+        }
+
+        .flex-75 {
+            flex-grow: 0.75;
+            border: 1px solid red;
+
+        }
+
+        .flex-70 {
+            display: flex;
+            flex-grow: 0.70001;
+            border: 1px solid red;
+            height: 50%;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+            perspective: 600px;
+
+
+        }
+
+        .flex-30 {
+            flex-grow: 0.29999;
+            border: 1px solid red;
+
+        }
+
+        .flex-50 {
+            display: flex;
+            flex-grow: 0.5;
+            border: 1px solid red;
+            height: 100%;
+            width: 100%;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        img {
+            width: 400px;
+        }
+
+        .rotate-hor-center {
+            animation: rotate-hor-center 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+        }
+
+        .rButton {
+            width: 80%;
+            height: 80%;
+            text-align: center;
+            background-color: #66CA43;
+            box-shadow: 8px 8px 6px rgba(0, 0, 0, 0.25);
+            border-radius: 25px;
+        }
+
+        .slot {
+            width: 100%;
+            height: auto;
+            transition: transfrom 1s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .slot_face {
+
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .slot_face-front {
+            background: red;
+        }
+
+        .slot_face-back {
+            background: blue;
+            transform: rotateY(180deg);
+        }
+
+        @keyframes rotate-hor-center {
+            0% {
+                transform: rotateX(0);
+            }
+
+            100% {
+                transform: rotateX(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="col">
+        <div class="flex-8">LOGO</div>
+        <div class="row flex-83">
+            <div class="flex-13" id="winTag1"></div>
+            <div class="col flex-75">
+                <div class="flex-70">
+                    <div class="slot">
+                        <img class="slot_face slot_face-front" id="slot1" src="1.png" />
+                        <img class="slot_face slot_face-back" src="cross2.png" />
+                    </div>
+                    <div class="slot">
+                        <img class="slot_face slot_face-front" id="slot2" src="2.png" />
+                        <img class="slot_face slot_face-back" src="cross2.png" />
+                    </div>
+                    <div class="slot">
+                        <img class="slot_face slot_face-front" id="slot3" src="3.png" />
+                        <img class="slot_face slot_face-back" src="cross2.png" />
+                    </div>
+                </div>
+                <div class="row flex-30">
+                    <div class="flex-50" id="mBalance">50</div>
+                    <div class="flex-50">
+                        <div class="rButton" id="roll">ROLL</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-13" id="winTag2"></div>
+        </div>
+        <div class="flex-8">footer</div>
+    </div>
+
+    <script>
+
+        function slotRoll(slotID) {
+
+            //generate random number
+            /* let numbers = '0123456789'.split('');
+             let roll = '';
+ 
+             for (let i = 0; i < 3; i++) {
+                 roll += numbers[Math.floor(Math.random() * 10)];
+             }
+ */
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max)
+            }
+
+            roll = getRandomInt(1000)
+
+            //console.log(roll);
+            //return roll;
+
+            //check roll and return a value. Used higher numbers to be able to add more slots, and better tweaking of rng
+            if (roll <= 500) {
+                slotSpin = 1;
+            } else if (roll > 500 && roll < 800) {
+                slotSpin = 2;
+            } else if (roll >= 801) {
+                slotSpin = 3;
+            }
+            //console.log(slotSpin);
+        }
+
+        //console.log(slotRoll());
+
+        //function for displaying slot images and check if win
+        let balance = "50";
+
+        function showSlot() {
+            let x = document.getElementById('slot1')
+            let y = document.getElementById('slot2')
+            let z = document.getElementById('slot3')
+
+
+
+            function animateSlot(slotSel) {
+                if (x.classList.contains('rotate-hor-center')) {
+                    slotSel.classList.remove('rotate-hor-center');
+                    void slotSel.offsetWidth;
+                    slotSel.classList.add('rotate-hor-center');
+                } else {
+                    slotSel.classList.add('rotate-hor-center');
+                    void slotSel.offsetWidth;
+                }
+            }
+
+
+            animateSlot(x);
+
+            animateSlot(y);
+
+            animateSlot(z);
+
+
+            function slottt() {
+                slotRoll(1)
+                x.src = slotSpin + ".png";
+                spin1 = slotSpin;
+
+
+                slotRoll(2);
+                y.src = slotSpin + ".png";
+                spin2 = slotSpin;
+
+                slotRoll(3);
+                z.src = slotSpin + ".png";
+                spin3 = slotSpin;
+            }
+
+
+
+
+            //check winner
+            if (spin1 == 1 && spin2 == 1 && spin3 == 1) {
+                console.log("winner 1 !!!");
+                document.getElementById("winTag1").innerHTML = "winner 111!!";
+                document.getElementById("winTag2").innerHTML = "winner 111!!";
+                balance = Number(balance) + 10;
+            } else if (spin1 == 2 && spin2 == 2 && spin3 == 2) {
+                console.log("Winner 2 !!!");
+                document.getElementById("winTag1").innerHTML = "winner 222!!";
+                document.getElementById("winTag2").innerHTML = "winner 222!!";
+                balance = Number(balance) + 100;
+            } else if (spin1 == 3 && spin2 == 3 && spin3 == 3) {
+                console.log("Winner 3 !!!");
+                document.getElementById("winTag1").innerHTML = "winner 333!!";
+                document.getElementById("winTag2").innerHTML = "winner 333!!";
+                balance = Number(balance) + 1000;
+            } else {
+                document.getElementById("winTag1").innerHTML = "Try again!";
+                document.getElementById("winTag2").innerHTML = "Try again!";
+                balance = Number(balance) - 5;
+            }
+            //update balance
+            document.getElementById("mBalance").innerHTML = balance
+
+
+        }
+
+        function rollIfBalance() {
+
+            if (balance <= 0) {
+                document.getElementById("mBalance").innerHTML = "add more money to spin! (reload page)";
+            } else {
+                showSlot();
+
+            }
+        }
+
+
+        //roll.addEventListener("click", slotRoll);
+        roll.addEventListener("click", rollIfBalance)
+
+    </script>
+</body>
+
+</html>

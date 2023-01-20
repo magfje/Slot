@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            background-color: aqua;
+        }
+
+        .container {}
+
+        .alertBar {
+            background-color: antiquewhite;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem;
+        }
+
+        .slotContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            perspective: 1000px;
+
+        }
+
+        .slotContainer img {
+            width: 400px;
+        }
+
+        .slot {
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        /* .slot:hover {
+            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0s both;
+        } */
+
+        .slot:nth-child(1):hover {
+            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0s both;
+        }
+
+        .slot:nth-child(2):hover {
+            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.1s both;
+        }
+
+        .slot:nth-child(3):hover {
+            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.2s both;
+        }
+
+        .slotAnim {
+            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0s both;
+        }
+
+        .slotFace {
+            border: 2px solid black;
+            backface-visibility: hidden;
+        }
+
+        .slotFace-front {
+            position: absolute;
+            background-color: blue;
+
+        }
+
+        .slotFace-back {
+            background-color: red;
+            transform: rotateX(180deg);
+        }
+
+        .bottomBar {
+            display: flex;
+            justify-content: center;
+            margin: 2rem;
+            height: 8rem;
+        }
+
+        .stats {
+            flex: 1;
+            background-color: beige;
+        }
+
+        .rButton {
+            flex: 2;
+        }
+
+        @keyframes rotate-hor-center {
+            0% {
+                transform: rotateX(0);
+            }
+
+            100% {
+                transform: rotateX(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img src="LOGO.PNG">
+        <h1>SlotMachine</h1>
+    </nav>
+    <div class="container">
+        <div class="alertBar">
+            <h2 id="alertText">Some Alert</h2>
+        </div>
+        <div class="slotContainer">
+            <div class="slot" id="slot1">
+                <img class="slotFace slotFace-front" id="s1img" src="1.png">
+                <img class="slotFace slotFace-back" src="2.png">
+            </div>
+            <div class="slot" id="slot2">
+                <img class="slotFace slotFace-front" id="s2img" src="2.png">
+                <img class="slotFace slotFace-back" src="2.png">
+            </div>
+            <div class="slot" id="slot3">
+                <img class="slotFace slotFace-front" id="s3img" src="3.png">
+                <img class="slotFace slotFace-back" src="2.png">
+            </div>
+        </div>
+        <div class="bottomBar">
+            <div class="stats">
+                <h2 id="mBalance">50</h2>
+                <h2>last win</h2>
+                <h2>cost</h2>
+            </div>
+            <button class="rButton" id="roll">ROLL</button>
+        </div>
+    </div>
+
+    <script>
+
+        //Starting Balance
+        let balance = "50";
+        const slotFace = document.querySelectorAll('.slotFace-front');
+        const slotCont = document.querySelectorAll('.slot');
+
+
+        function slotRoll() {
+            roll = Math.floor(Math.random() * 1000);
+            //check roll and return a value. Used higher numbers to be able to add more slots, and better tweaking of rng
+            if (roll <= 500) {
+                slotSpin = 1;
+            } else if (roll > 500 && roll < 800) {
+                slotSpin = 2;
+            } else if (roll >= 801) {
+                slotSpin = 3;
+            }
+
+        }
+
+        function roller() {
+            for (let i = 0; i < slotFace.length; i++) {
+                animateRoll()
+                setTimeout(() => {
+                    slotRoll();
+                    slotFace[i].src = slotSpin + ".png";
+                    checkslot[i] = slotSpin;
+                }, (i + 1) * 500);
+            }
+
+        }
+
+        function animateRoll() {
+
+            for (let u = 0; u < slotCont.length; u++) {
+                let slot = slotCont[u].classList
+                setTimeout(() => {
+                    if (slot.contains('slotAnim')) {
+                        slot.remove('slotAnim');
+                        void slotCont[u].offsetWidth;
+                        slot.add('slotAnim');
+                    } else {
+                        slot.add('slotAnim');
+                        void slotCont[u].offsetWidth;
+                    }
+                }, (u + 1) * 200);
+            }
+        }
+
+
+
+
+        /* 
+                
+        
+                //function for displaying slot images and check if win
+                function showSlot() {
+        
+                    //adds animated class to slotID
+                    function animateSlot(slotSel) {
+                        if (slotSel.classList.contains('slotAnim')) {
+                            slotSel.classList.remove('slotAnim');
+                            void slotSel.offsetWidth;
+                            slotSel.classList.add('slotAnim');
+                        } else {
+                            slotSel.classList.add('slotAnim');
+                            void slotSel.offsetWidth;
+                        }
+                    }
+                    //defines and animates slots
+                    let x = document.getElementById('slot1')
+                    let y = document.getElementById('slot2')
+                    let z = document.getElementById('slot3')
+                    let o = document.getElementById('s1img');
+                    let i = document.getElementById('s2img');
+                    let u = document.getElementById('s3img');
+                    let spin1 = '';
+                    let spin2 = '';
+                    let spin3 = '';
+        
+                    function addDelay() {
+                        setTimeout(() => {
+                            animateSlot(x)
+                            setTimeout(() => {
+                                slotRoll()
+                                o.src = slotSpin + ".png";
+                                spin1 = slotSpin;
+                            }, 600);
+                        }, 200);
+        
+                        setTimeout(() => {
+                            animateSlot(y)
+                            setTimeout(() => {
+                                slotRoll()
+                                i.src = slotSpin + ".png";
+                                spin2 = slotSpin;
+                            }, 600);
+                        }, 600);
+        
+                        setTimeout(() => {
+                            animateSlot(z)
+                            setTimeout(() => {
+                                slotRoll()
+                                u.src = slotSpin + ".png";
+                                spin3 = slotSpin;
+                            }, 600);
+        
+                        }, 1000);
+        
+                        checkWin()
+                    }
+                    addDelay()
+        
+                    //check winner
+                    function checkWin() {
+                        if (spin1 == 1 && spin2 == 1 && spin3 == 1) {
+                            console.log("winner 1 !!!");
+                            document.getElementById('alertText').innerHTML = "winner 111!!";
+                            balance = Number(balance) + 10;
+                        } else if (spin1 == 2 && spin2 == 2 && spin3 == 2) {
+                            console.log("Winner 2 !!!");
+                            document.getElementById('alertText').innerHTML = "winner 222!!";
+                            balance = Number(balance) + 100;
+                        } else if (spin1 == 3 && spin2 == 3 && spin3 == 3) {
+                            console.log("Winner 3 !!!");
+                            document.getElementById('alertText').innerHTML = "winner 333!!";
+                            balance = Number(balance) + 1000;
+                        } else {
+                            document.getElementById('alertText').innerHTML = "Try again!";
+                            balance = Number(balance) - 1;
+                        }
+                    }
+        
+                    //update balance
+                    document.getElementById("mBalance").innerHTML = balance
+        
+        
+                }
+        
+                function rollIfBalance() {
+        
+                    if (balance <= 0) {
+                        document.getElementById("mBalance").innerHTML = "add more money to spin! (reload page)";
+                    } else {
+                        showSlot();
+        
+                    }
+                }
+        
+         */
+        //roll.addEventListener("click", slotRoll);
+        roll.addEventListener("click", roller)
+
+    </script>
+</body>
+
+</html>
