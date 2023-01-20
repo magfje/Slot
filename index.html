@@ -283,15 +283,15 @@
             //Check input param, and apply changes
             if (winNum == 1) {
                 alertBar.style.background = "#A3BE8C";
-                balance = Number(balance) + Math.round(cost * 1.5);
+                balance = Number(balance) + Math.round(cost * 2);
                 alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 2);
             } else if (winNum == 2) {
                 alertBar.style.background = "#A3BE8C";
-                balance = Number(balance) + Math.round(cost * 2);
+                balance = Number(balance) + Math.round(cost * 5);
                 alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 5);
             } else if (winNum == 3) {
                 alertBar.style.background = "#A3BE8C"
-                balance = Number(balance) + Math.round(cost * 3)
+                balance = Number(balance) + Math.round(cost * 10)
                 alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 10);
             } else {
                 alertBar.style.background = "#B48EAD"
