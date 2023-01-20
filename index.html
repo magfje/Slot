@@ -8,7 +8,6 @@
     <title>Slot</title>
 
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 
         * {
@@ -24,6 +23,7 @@
             background-color: #2E3440;
             color: #ECEFF4;
         }
+
         nav h1 {
             background-color: #2E3440;
             padding: 20px;
@@ -57,7 +57,7 @@
 
         .slotContainer img {
             max-width: 25rem;
-            
+
         }
 
         .slot {
@@ -92,7 +92,7 @@
         .slotFace {
             backface-visibility: hidden;
             border-radius: 20px;
-            
+
         }
 
         .slotFace-front {
@@ -127,7 +127,7 @@
             gap: 20px;
             background-color: #D8DEE9;
             border-radius: 25px;
-            
+
         }
 
         .rButton {
@@ -144,7 +144,7 @@
         .rButton:hover {
             box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
             background-color: #88C0D0;
-            
+
         }
 
         .rButton:disabled {
@@ -199,7 +199,7 @@
             </div>
             <button class="rButton" id="roll">ROLL</button>
         </div>
-        
+
     </div>
 
     <script>
@@ -212,7 +212,7 @@
         const slotCont = document.querySelectorAll('.slot');
 
         //audio
-        
+
 
 
         function slotRoll() {
@@ -237,7 +237,7 @@
                     slotRoll();
                     slotFace[i].src = slotSpin + ".png";
                     checkWin.push(slotSpin);
-                    
+
 
                     if (i === 2) {
                         if (checkWin.every((val) => val === 1)) {
@@ -320,122 +320,16 @@
                 }, 1200);
             }
         }
-        
+
         let costLoc = document.getElementById('cost');
         let costSet = document.getElementById('costSet')
-        costLoc.addEventListener("input", function(e) {
-        cost = Math.floor(e.currentTarget.value / 5.2 + 1);
-        costSet.innerHTML = cost
+        costLoc.addEventListener("input", function (e) {
+            cost = Math.floor(e.currentTarget.value / 5.2 + 1);
+            costSet.innerHTML = cost
         });
 
         //EventListener
         roll.addEventListener("click", rollIfBalance)
-
-
-
-
-
-        /* 
-                
-        
-                //function for displaying slot images and check if win
-                function showSlot() {
-        
-                    //adds animated class to slotID
-                    function animateSlot(slotSel) {
-                        if (slotSel.classList.contains('slotAnim')) {
-                            slotSel.classList.remove('slotAnim');
-                            void slotSel.offsetWidth;
-                            slotSel.classList.add('slotAnim');
-                        } else {
-                            slotSel.classList.add('slotAnim');
-                            void slotSel.offsetWidth;
-                        }
-                    }
-                    //defines and animates slots
-                    let x = document.getElementById('slot1')
-                    let y = document.getElementById('slot2')
-                    let z = document.getElementById('slot3')
-                    let o = document.getElementById('s1img');
-                    let i = document.getElementById('s2img');
-                    let u = document.getElementById('s3img');
-                    let spin1 = '';
-                    let spin2 = '';
-                    let spin3 = '';
-        
-                    function addDelay() {
-                        setTimeout(() => {
-                            animateSlot(x)
-                            setTimeout(() => {
-                                slotRoll()
-                                o.src = slotSpin + ".png";
-                                spin1 = slotSpin;
-                            }, 600);
-                        }, 200);
-        
-                        setTimeout(() => {
-                            animateSlot(y)
-                            setTimeout(() => {
-                                slotRoll()
-                                i.src = slotSpin + ".png";
-                                spin2 = slotSpin;
-                            }, 600);
-                        }, 600);
-        
-                        setTimeout(() => {
-                            animateSlot(z)
-                            setTimeout(() => {
-                                slotRoll()
-                                u.src = slotSpin + ".png";
-                                spin3 = slotSpin;
-                            }, 600);
-        
-                        }, 1000);
-        
-                        checkWin()
-                    }
-                    addDelay()
-        
-                    //check winner
-                    function checkWin() {
-                        if (spin1 == 1 && spin2 == 1 && spin3 == 1) {
-                            console.log("winner 1 !!!");
-                            document.getElementById('alertText').innerHTML = "winner 111!!";
-                            balance = Number(balance) + 10;
-                        } else if (spin1 == 2 && spin2 == 2 && spin3 == 2) {
-                            console.log("Winner 2 !!!");
-                            document.getElementById('alertText').innerHTML = "winner 222!!";
-                            balance = Number(balance) + 100;
-                        } else if (spin1 == 3 && spin2 == 3 && spin3 == 3) {
-                            console.log("Winner 3 !!!");
-                            document.getElementById('alertText').innerHTML = "winner 333!!";
-                            balance = Number(balance) + 1000;
-                        } else {
-                            document.getElementById('alertText').innerHTML = "Try again!";
-                            balance = Number(balance) - 1;
-                        }
-                    }
-        
-                    //update balance
-                    document.getElementById("mBalance").innerHTML = balance
-        
-        
-                }
-        
-                function rollIfBalance() {
-        
-                    if (balance < 5) {
-                        document.getElementById("mBalance").innerHTML = "add more money to spin! (reload page)";
-                    } else {
-                        roller();
-        
-                    }
-                }
-        
-         */
-        //roll.addEventListener("click", slotRoll);
-
-
 
     </script>
 </body>
