@@ -44,6 +44,9 @@
         .slot {
             transform-style: preserve-3d;
             position: relative;
+            height: fit-content;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            border-radius: 25px;
         }
 
         /* .slot:hover {
@@ -67,18 +70,18 @@
         }
 
         .slotFace {
-            border: 2px solid black;
             backface-visibility: hidden;
+            border-radius: 25px;
+
         }
 
         .slotFace-front {
             position: absolute;
-            background-color: blue;
+            
 
         }
 
         .slotFace-back {
-            background-color: red;
             transform: rotateX(180deg);
         }
 
@@ -92,6 +95,11 @@
         .stats {
             flex: 1;
             background-color: beige;
+        }
+
+        .stats div {
+            display: flex;
+            padding: 10px;
         }
 
         .rButton {
@@ -112,7 +120,7 @@
 
 <body>
     <nav>
-        <img src="LOGO.PNG">
+        <img src="LOGO.jfif">
         <h1>SlotMachine</h1>
     </nav>
     <div class="container">
@@ -121,23 +129,28 @@
         </div>
         <div class="slotContainer">
             <div class="slot" id="slot1">
-                <img class="slotFace slotFace-front" id="s1img" src="1.png">
-                <img class="slotFace slotFace-back" src="2.png">
+                <img class="slotFace slotFace-front" id="s1img" src="back.jfif">
+                <img class="slotFace slotFace-back" src="back.jfif">
             </div>
             <div class="slot" id="slot2">
-                <img class="slotFace slotFace-front" id="s2img" src="2.png">
-                <img class="slotFace slotFace-back" src="2.png">
+                <img class="slotFace slotFace-front" id="s2img" src="back.jfif">
+                <img class="slotFace slotFace-back" src="back.jfif">
             </div>
             <div class="slot" id="slot3">
-                <img class="slotFace slotFace-front" id="s3img" src="3.png">
-                <img class="slotFace slotFace-back" src="2.png">
+                <img class="slotFace slotFace-front" id="s3img" src="back.jfif">
+                <img class="slotFace slotFace-back" src="back.jfif">
             </div>
         </div>
         <div class="bottomBar">
             <div class="stats">
-                <h2 id="mBalance">50</h2>
-                <h2>last win</h2>
-                <h2>cost</h2>
+                <div class="balance">
+                    <h2>Balance:</h2>
+                    <h2 id="mBalance">50</h2>
+                </div>
+                <div>
+                    <h2>Cost per Roll:</h2>
+                    <h2>5</h2>
+                </div>
             </div>
             <button class="rButton" id="roll">ROLL</button>
         </div>
@@ -147,10 +160,9 @@
 
         //Starting Balance
         let balance = "50";
+
         const slotFace = document.querySelectorAll('.slotFace-front');
         const slotCont = document.querySelectorAll('.slot');
-
-
 
         function slotRoll() {
             roll = Math.floor(Math.random() * 1000);
@@ -165,36 +177,33 @@
 
         }
 
-
-
+        //rolls and check if win with delay
         function roller() {
             const checkWin = []
             for (let i = 0; i < slotFace.length; i++) {
                 animateRoll()
                 setTimeout(() => {
                     slotRoll();
-                    slotFace[i].src = slotSpin + ".png";
+                    slotFace[i].src = slotSpin + ".jfif";
                     checkWin.push(slotSpin);
 
                     if (i === 2) {
                         if (checkWin.every((val) => val === 1)) {
-                            console.log("111");
+                            animateWin(1);
                         } else if (checkWin.every((val) => val === 2)) {
-                            console.log("222")
+                            animateWin(2);
                         } else if (checkWin.every((val) => val === 3)) {
-                            console.log("333")
+                            animateWin(3);
                         } else {
-                            console.log("try again!")
+                            animateWin();
                         }
                     }
-                }, (i + 1) * 500);
+                }, (i + 1) * 420);
             }
-
         }
 
-
+        //adds delay and animation on slots
         function animateRoll() {
-
             for (let u = 0; u < slotCont.length; u++) {
                 let slot = slotCont[u].classList
                 setTimeout(() => {
@@ -209,6 +218,51 @@
                 }, (u + 1) * 200);
             }
         }
+
+        //Style changes on Win
+        function animateWin(winNum) {
+            //define vars
+            let alertText = document.getElementById("alertText");
+            let alertBar = document.querySelector(".alertBar");
+
+            //Check input param, and apply changes
+            if (winNum == 1) {
+                alertBar.style.background = "yellow"
+                balance = Number(balance) + 10
+                alertText.innerHTML = "WINNER! You Won 10"
+            } else if (winNum == 2) {
+                alertBar.style.background = "yellow"
+                balance = Number(balance) + 20
+                alertText.innerHTML = "WINNER! You Won 30"
+            } else if (winNum == 3) {
+                alertBar.style.background = "yellow"
+                balance = Number(balance) + 30
+                alertText.innerHTML = "WINNER! You Won 30"
+            } else {
+                alertBar.style.background = "red"
+                alertText.innerHTML = "Try Again!"
+                balance = Number(balance) - 5
+            }
+            //update Balance
+            document.getElementById("mBalance").innerHTML = balance
+        }
+
+        //only rolls if balance < 5
+        function rollIfBalance() {
+            if (balance < 5) {
+                document.getElementById("mBalance").innerHTML = "add more money to spin! (reload page)";
+            } else {
+                this.disabled = true
+                roller();
+                setTimeout(() => {
+                    this.disabled = false;
+                }, 1200);
+            }
+        }
+
+        //EventListener
+        roll.addEventListener("click", rollIfBalance)
+
 
 
 
@@ -246,7 +300,7 @@
                             animateSlot(x)
                             setTimeout(() => {
                                 slotRoll()
-                                o.src = slotSpin + ".png";
+                                o.src = slotSpin + ".jfif";
                                 spin1 = slotSpin;
                             }, 600);
                         }, 200);
@@ -255,7 +309,7 @@
                             animateSlot(y)
                             setTimeout(() => {
                                 slotRoll()
-                                i.src = slotSpin + ".png";
+                                i.src = slotSpin + ".jfif";
                                 spin2 = slotSpin;
                             }, 600);
                         }, 600);
@@ -264,7 +318,7 @@
                             animateSlot(z)
                             setTimeout(() => {
                                 slotRoll()
-                                u.src = slotSpin + ".png";
+                                u.src = slotSpin + ".jfif";
                                 spin3 = slotSpin;
                             }, 600);
         
@@ -302,17 +356,18 @@
         
                 function rollIfBalance() {
         
-                    if (balance <= 0) {
+                    if (balance < 5) {
                         document.getElementById("mBalance").innerHTML = "add more money to spin! (reload page)";
                     } else {
-                        showSlot();
+                        roller();
         
                     }
                 }
         
          */
         //roll.addEventListener("click", slotRoll);
-        roll.addEventListener("click", roller)
+
+
 
     </script>
 </body>
