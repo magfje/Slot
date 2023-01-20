@@ -35,8 +35,8 @@
             background-color: #5E81AC;
             text-align: center;
             padding: 2rem;
-            margin: 2rem;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            margin: 3rem;
+            box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
             border-radius: 25px;
             font-size: 30px;
         }
@@ -136,12 +136,20 @@
             border-radius: 25px;
             box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
             font-size: 80px;
-            color: #D8DEE9;;
+            color: #D8DEE9;
+            cursor: pointer;
         }
 
         .rButton:hover {
             box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
             background-color: #88C0D0;
+            
+        }
+
+        .rButton:disabled {
+            background-color: #D08770;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+            cursor: default;
         }
 
         @keyframes rotate-hor-center {
@@ -284,7 +292,8 @@
         //only rolls if balance < 5
         function rollIfBalance() {
             if (balance < 5) {
-                document.getElementById("mBalance").innerHTML = "add more money to spin! (reload page)";
+                document.getElementById("roll").innerHTML = "add more money to spin! (reload page)";
+                document.getElementById("roll").style.background = "#BF616A"
             } else {
                 this.disabled = true
                 roller();
