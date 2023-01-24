@@ -1,337 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slot</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap");
 
-        * {
-            margin: 0px;
-            padding: 0px;
-            background-color: #4C566A;
-            font-family: 'Josefin Sans', sans-serif;
-        }
+      * {
+        margin: 0px;
+        padding: 0px;
+        background-color: #4c566a;
+        font-family: "Josefin Sans", sans-serif;
+      }
 
-        nav {
-            display: flex;
-            gap: 2rem;
-            background-color: #2E3440;
-            color: #ECEFF4;
-        }
+      nav {
+        display: flex;
+        gap: 2rem;
+        background-color: #2e3440;
+        color: #eceff4;
+      }
 
-        nav h1 {
-            background-color: #2E3440;
-            padding: 20px;
-        }
+      nav h1 {
+        background-color: #2e3440;
+        padding: 20px;
+      }
 
-        .container {}
+      .container {
+      }
 
-        .alertBar {
-            background-color: #EBCB8B;
-            text-align: center;
-            padding: 2rem;
-            margin: 3rem;
-            box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-            border-radius: 25px;
-            font-size: 30px;
-        }
+      .alertBar {
+        background-color: #ebcb8b;
+        text-align: center;
+        padding: 2rem;
+        margin: 3rem;
+        box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+        border-radius: 25px;
+        font-size: 30px;
+      }
 
-        .alertBar h2 {
-            background-color: #5E81AC;
-        }
+      .alertBar h2 {
+        background-color: #5e81ac;
+      }
 
-        .slotContainer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            padding: 5rem;
-            perspective: 80rem;
-            margin: 3rem;
-        }
+      .slotContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 5rem;
+        perspective: 80rem;
+        margin: 3rem;
+      }
 
-        .slotContainer img {
-            max-width: 25rem;
+      .slotContainer img {
+        max-width: 25rem;
+      }
 
-        }
+      .slot {
+        transform-style: preserve-3d;
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        border-radius: 25px;
+        border: 10px solid #2e3440;
+        background-color: #2e3440;
+      }
 
-        .slot {
-            transform-style: preserve-3d;
-            position: relative;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-            border-radius: 25px;
-            border: 10px solid #2E3440;
-            background-color: #2E3440;
-        }
-
-        /* .slot:hover {
+      /* .slot:hover {
             animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0s both;
         } */
 
-        .slot:nth-child(1):hover {
-            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0s both;
+      .slot:nth-child(1):hover {
+        animation: rotate-hor-center 1s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+          0s both;
+      }
+
+      .slot:nth-child(2):hover {
+        animation: rotate-hor-center 1s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+          0.1s both;
+      }
+
+      .slot:nth-child(3):hover {
+        animation: rotate-hor-center 1s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+          0.2s both;
+      }
+
+      .slotAnim {
+        animation: rotate-hor-center 1s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+          0s both;
+      }
+
+      .slotFace {
+        backface-visibility: hidden;
+        border-radius: 20px;
+      }
+
+      .slotFace-front {
+        position: absolute;
+      }
+
+      .slotFace-back {
+        transform: rotateX(180deg);
+      }
+
+      .bottomBar {
+        display: flex;
+        justify-content: center;
+        margin: 2rem;
+        height: 8rem;
+        gap: 15px;
+      }
+
+      .stats {
+        flex: 1;
+        background-color: #d8dee9;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        border-radius: 25px;
+        font-size: 25px;
+      }
+
+      .stats div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+        gap: 20px;
+        background-color: #d8dee9;
+        border-radius: 25px;
+      }
+
+      .rButton {
+        flex: 2;
+        border: none;
+        background-color: #8fbcbb;
+        border-radius: 25px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        font-size: 80px;
+        color: #d8dee9;
+        cursor: pointer;
+      }
+
+      .rButton:hover {
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+          rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+          rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+        background-color: #88c0d0;
+      }
+
+      .rButton:disabled {
+        background-color: #d08770;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+        cursor: default;
+      }
+
+      @keyframes rotate-hor-center {
+        0% {
+          transform: rotateX(0);
         }
 
-        .slot:nth-child(2):hover {
-            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.1s both;
+        100% {
+          transform: rotateX(360deg);
         }
-
-        .slot:nth-child(3):hover {
-            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0.2s both;
-        }
-
-        .slotAnim {
-            animation: rotate-hor-center 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) 0s both;
-        }
-
-        .slotFace {
-            backface-visibility: hidden;
-            border-radius: 20px;
-
-        }
-
-        .slotFace-front {
-            position: absolute;
-        }
-
-        .slotFace-back {
-            transform: rotateX(180deg);
-        }
-
-        .bottomBar {
-            display: flex;
-            justify-content: center;
-            margin: 2rem;
-            height: 8rem;
-            gap: 15px;
-        }
-
-        .stats {
-            flex: 1;
-            background-color: #D8DEE9;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-            border-radius: 25px;
-            font-size: 25px;
-        }
-
-        .stats div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-top: 10px;
-            gap: 20px;
-            background-color: #D8DEE9;
-            border-radius: 25px;
-
-        }
-
-        .rButton {
-            flex: 2;
-            border: none;
-            background-color: #8FBCBB;
-            border-radius: 25px;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-            font-size: 80px;
-            color: #D8DEE9;
-            cursor: pointer;
-        }
-
-        .rButton:hover {
-            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-            background-color: #88C0D0;
-
-        }
-
-        .rButton:disabled {
-            background-color: #D08770;
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-            cursor: default;
-        }
-
-        @keyframes rotate-hor-center {
-            0% {
-                transform: rotateX(0);
-            }
-
-            100% {
-                transform: rotateX(360deg);
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav>
-        <h1>SlotMachine</h1>
+      <h1>SlotMachine</h1>
     </nav>
     <div class="container">
-        <div class="alertBar">SPIN TO WIN!!</div>
-        <div class="slotContainer">
-            <div class="slot" id="slot1">
-                <img class="slotFace slotFace-front" id="s1img" src="back.png">
-                <img class="slotFace slotFace-back" src="back.png">
-            </div>
-            <div class="slot" id="slot2">
-                <img class="slotFace slotFace-front" id="s2img" src="back.png">
-                <img class="slotFace slotFace-back" src="back.png">
-            </div>
-            <div class="slot" id="slot3">
-                <img class="slotFace slotFace-front" id="s3img" src="back.png">
-                <img class="slotFace slotFace-back" src="back.png">
-            </div>
+      <div class="alertBar">SPIN TO WIN!!</div>
+      <div class="slotContainer">
+        <div class="slot" id="slot1">
+          <img class="slotFace slotFace-front" id="s1img" src="back.png" />
+          <img class="slotFace slotFace-back" src="back.png" />
         </div>
-        <div class="bottomBar">
-            <div class="stats">
-                <div class="balance">
-                    <div>Balance:</div>
-                    <div id="mBalance">50</div>
-                </div>
-                <div>
-                    <div>Bet:</div>
-                    <div id="costSet">5</div>
-                    <input type="range" id="cost">
-                </div>
-            </div>
-            <button class="rButton" id="roll">ROLL</button>
+        <div class="slot" id="slot2">
+          <img class="slotFace slotFace-front" id="s2img" src="back.png" />
+          <img class="slotFace slotFace-back" src="back.png" />
         </div>
-
+        <div class="slot" id="slot3">
+          <img class="slotFace slotFace-front" id="s3img" src="back.png" />
+          <img class="slotFace slotFace-back" src="back.png" />
+        </div>
+      </div>
+      <div class="bottomBar">
+        <div class="stats">
+          <div class="balance">
+            <div>Balance:</div>
+            <div id="mBalance">50</div>
+          </div>
+          <div>
+            <div>Bet:</div>
+            <div id="costSet">5</div>
+            <input type="range" id="cost" />
+          </div>
+        </div>
+        <button class="rButton" id="roll">ROLL</button>
+      </div>
     </div>
 
     <script>
+      //Starting Balance
+      let balance = "50";
+      let cost = 5;
 
-        //Starting Balance
-        let balance = "50";
-        let cost = 5;
+      const slotFace = document.querySelectorAll(".slotFace-front");
+      const slotCont = document.querySelectorAll(".slot");
 
-        const slotFace = document.querySelectorAll('.slotFace-front');
-        const slotCont = document.querySelectorAll('.slot');
+      //audio
 
-        //audio
-
-
-
-        function slotRoll() {
-            roll = Math.floor(Math.random() * 1000);
-            //check roll and return a value. Used higher numbers to be able to add more slots, and better tweaking of rng
-            if (roll <= 500) {
-                slotSpin = 1;
-            } else if (roll > 500 && roll < 800) {
-                slotSpin = 2;
-            } else if (roll >= 801) {
-                slotSpin = 3;
-            }
-
+      function slotRoll() {
+        roll = Math.floor(Math.random() * 1000);
+        //check roll and return a value. Used higher numbers to be able to add more slots, and better tweaking of rng
+        if (roll <= 500) {
+          slotSpin = 1;
+        } else if (roll > 500 && roll < 800) {
+          slotSpin = 2;
+        } else if (roll >= 801) {
+          slotSpin = 3;
         }
+      }
 
-        //rolls and check if win with delay
-        function roller() {
-            const checkWin = []
-            for (let i = 0; i < slotFace.length; i++) {
-                animateRoll()
-                setTimeout(() => {
-                    slotRoll();
-                    slotFace[i].src = slotSpin + ".png";
-                    checkWin.push(slotSpin);
+      //rolls and check if win with delay
+      function roller() {
+        const checkWin = [];
+        for (let i = 0; i < slotFace.length; i++) {
+          animateRoll();
+          setTimeout(() => {
+            slotRoll();
+            slotFace[i].src = slotSpin + ".png";
+            checkWin.push(slotSpin);
 
-
-                    if (i === 2) {
-                        if (checkWin.every((val) => val === 1)) {
-                            animateWin(1);
-                            new Audio('win1.ogg').play();
-                        } else if (checkWin.every((val) => val === 2)) {
-                            animateWin(2);
-                            new Audio('win2.ogg').play();
-                        } else if (checkWin.every((val) => val === 3)) {
-                            animateWin(3);
-                            new Audio('win3.ogg').play();
-                        } else {
-                            animateWin();
-                        }
-                    }
-                }, (i + 1) * 420);
+            if (i === 2) {
+              if (checkWin.every((val) => val === 1)) {
+                animateWin(1);
+                new Audio("win1.ogg").play();
+              } else if (checkWin.every((val) => val === 2)) {
+                animateWin(2);
+                new Audio("win2.ogg").play();
+              } else if (checkWin.every((val) => val === 3)) {
+                animateWin(3);
+                new Audio("win3.ogg").play();
+              } else {
+                animateWin();
+              }
             }
+          }, (i + 1) * 420);
         }
+      }
 
-        //adds delay and animation on slots
-        function animateRoll() {
-            for (let u = 0; u < slotCont.length; u++) {
-                let slot = slotCont[u].classList
-                setTimeout(() => {
-                    if (slot.contains('slotAnim')) {
-                        slot.remove('slotAnim');
-                        void slotCont[u].offsetWidth;
-                        slot.add('slotAnim');
-                    } else {
-                        slot.add('slotAnim');
-                        void slotCont[u].offsetWidth;
-                    }
-                    new Audio('click.ogg').play();
-                }, (u + 1) * 200);
-            }
-        }
-
-        //Style changes on Win
-        function animateWin(winNum) {
-            //define vars
-            let alertBar = document.querySelector(".alertBar");
-
-            //Check input param, and apply changes
-            if (winNum == 1) {
-                alertBar.style.background = "#A3BE8C";
-                balance = Number(balance) + Math.round(cost * 2);
-                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 2);
-            } else if (winNum == 2) {
-                alertBar.style.background = "#A3BE8C";
-                balance = Number(balance) + Math.round(cost * 5);
-                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 5);
-            } else if (winNum == 3) {
-                alertBar.style.background = "#A3BE8C"
-                balance = Number(balance) + Math.round(cost * 10)
-                alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 10);
+      //adds delay and animation on slots
+      function animateRoll() {
+        for (let u = 0; u < slotCont.length; u++) {
+          let slot = slotCont[u].classList;
+          setTimeout(() => {
+            if (slot.contains("slotAnim")) {
+              slot.remove("slotAnim");
+              void slotCont[u].offsetWidth;
+              slot.add("slotAnim");
             } else {
-                alertBar.style.background = "#B48EAD"
-                alertBar.innerHTML = "Try Again!"
-                balance = Number(balance) - cost
+              slot.add("slotAnim");
+              void slotCont[u].offsetWidth;
             }
-            //update Balance
-            document.getElementById("mBalance").innerHTML = balance
+            new Audio("click.ogg").play();
+          }, (u + 1) * 200);
         }
+      }
 
-        //only rolls if balance < 5
-        function rollIfBalance() {
-            if (balance == 0) {
-                document.getElementById("roll").innerHTML = "add more money to spin!";
-                document.getElementById("roll").style.background = "#BF616A"
-                this.disabled = true
-            } else if (balance < cost) {
-                document.getElementById("roll").innerHTML = "reduce bet to spin";
-            } else {
-                document.getElementById("roll").innerHTML = "ROLLING";
-                this.disabled = true
-                roller();
-                setTimeout(() => {
-                    document.getElementById("roll").innerHTML = "ROLL";
-                    this.disabled = false;
-                }, 1200);
-            }
+      //Style changes on Win
+      function animateWin(winNum) {
+        //define vars
+        let alertBar = document.querySelector(".alertBar");
+
+        //Check input param, and apply changes
+        if (winNum == 1) {
+          alertBar.style.background = "#A3BE8C";
+          balance = Number(balance) + Math.round(cost * 2);
+          alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 2);
+        } else if (winNum == 2) {
+          alertBar.style.background = "#A3BE8C";
+          balance = Number(balance) + Math.round(cost * 5);
+          alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 5);
+        } else if (winNum == 3) {
+          alertBar.style.background = "#A3BE8C";
+          balance = Number(balance) + Math.round(cost * 10);
+          alertBar.innerHTML = "WINNER! You Won " + Math.round(cost * 10);
+        } else {
+          alertBar.style.background = "#B48EAD";
+          alertBar.innerHTML = "Try Again!";
+          balance = Number(balance) - cost;
         }
+        //update Balance
+        document.getElementById("mBalance").innerHTML = balance;
+      }
 
-        let costLoc = document.getElementById('cost');
-        let costSet = document.getElementById('costSet')
-        costLoc.addEventListener("input", function (e) {
-            cost = Math.floor(e.currentTarget.value / 5.2 + 1);
-            costSet.innerHTML = cost
-        });
+      //only rolls if balance < 5
+      function rollIfBalance() {
+        if (balance == 0) {
+          document.getElementById("roll").innerHTML = "add more money to spin!";
+          document.getElementById("roll").style.background = "#BF616A";
+          this.disabled = true;
+        } else if (balance < cost) {
+          document.getElementById("roll").innerHTML = "reduce bet to spin";
+        } else {
+          document.getElementById("roll").innerHTML = "ROLLING";
+          this.disabled = true;
+          roller();
+          setTimeout(() => {
+            document.getElementById("roll").innerHTML = "ROLL";
+            this.disabled = false;
+          }, 1200);
+        }
+      }
 
-        //EventListener
-        roll.addEventListener("click", rollIfBalance)
+      let costLoc = document.getElementById("cost");
+      let costSet = document.getElementById("costSet");
+      costLoc.addEventListener("input", function (e) {
+        cost = Math.floor(e.currentTarget.value / 5.2 + 1);
+        costSet.innerHTML = cost;
+      });
 
+      //EventListener
+      roll.addEventListener("click", rollIfBalance);
     </script>
-</body>
-
+  </body>
 </html>
